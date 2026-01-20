@@ -1,0 +1,12 @@
+# Blender 4.0.2 MTL File: 'AssetPack_Itch.blend'
+# www.blender.org
+
+newmtl Light
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 1.600000 0.586868 0.087273
+Ni 1.450000
+d 1.000000
+illum 2
