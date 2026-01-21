@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1e07b8ff617d449972960786262791, type: 3}
+  m_Name: DialogoNPC
+  m_EditorClassIdentifier: Assembly-CSharp::DialogoSO
+  hablador: NPC-man
+  frases:
+  - EEEEY, enhorabuena por ganar el premio gordo. Ahora puedes ir a canjear tu premio
+    a la salida.
+  - "Aunque...no te ser\xE1 f\xE1cil. Juejue. A las ancianas que suelen habituar
+    este bingo no les ha gustado mucho que ganases t\xFA."
+  - 
+  - "Nuestra mascota Ludopat\xEDa te echar\xE1 una mano con esas se\xF1oras enfurecidas."
+  - "Suerte llegando a la salida \n(\u02F6 \u2022\u0300 \u1D17 -\u02F6)."
+  velocidadTexto: 0.1
+  color: {r: 0, g: 0, b: 0, a: 0}

@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: NPCHabla Blackboard
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.RuntimeBlackboardAsset
-  VersionTimestamp: 639045161610718264
+  VersionTimestamp: 639045969147406371
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 15277171657448964648
+    m_Value1: 17403424263741766555
   m_Blackboard:
     m_Variables:
     - rid: 3160463076847255744
+    - rid: 3160463095824908571
   m_SharedBlackboardVariableGuids: []
   references:
     version: 2
@@ -30,6 +31,14 @@ MonoBehaviour:
           m_Value0: 1
           m_Value1: 0
         Name: Self
+        m_Value: {fileID: 0}
+    - rid: 3160463095824908571
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11499429997297179214
+          m_Value1: 15150024916418965370
+        Name: Player
         m_Value: {fileID: 0}
 --- !u!114 &-2193798306475876068
 MonoBehaviour:
@@ -63,34 +72,20 @@ MonoBehaviour:
           rid: 3160463076847255746
         BlackboardGroupReferences: []
         Root:
-          rid: 3160463076847255747
+          rid: 3160463095824908594
         m_ActiveNodes: []
         m_NodesToTick: []
         m_NodesToEnd:
           rid: 3160463076847255748
         m_EndedNodes:
           rid: 3160463076847255749
-        m_VersionTimestamp: 639045161610829803
+        m_VersionTimestamp: 639045981255274633
     - rid: 3160463076847255746
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Blackboard:
           rid: 3160463076847255750
         m_Source: {fileID: -5966162148829693651}
-    - rid: 3160463076847255747
-      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 11416437734718245107
-          m_Value1: 16098345161887902258
-        Graph:
-          rid: 3160463076847255745
-        m_Parent:
-          rid: -2
-        m_Child:
-          rid: -2
-        Repeat: 1
-        AllowMultipleRepeatsPerTick: 0
     - rid: 3160463076847255748
       type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
       data: 
@@ -101,8 +96,9 @@ MonoBehaviour:
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Variables:
-        - rid: 3160463076847255751
-    - rid: 3160463076847255751
+        - rid: 3160463095824908576
+        - rid: 3160463095824908577
+    - rid: 3160463095824908576
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -110,6 +106,42 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 0}
+    - rid: 3160463095824908577
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11499429997297179214
+          m_Value1: 15150024916418965370
+        Name: Player
+        m_Value: {fileID: 0}
+    - rid: 3160463095824908594
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 11416437734718245107
+          m_Value1: 16098345161887902258
+        Graph:
+          rid: 3160463076847255745
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 3160463095824908595
+        Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
+    - rid: 3160463095824908595
+      type: {class: HablarAction, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          m_Value0: 15767591848404186374
+          m_Value1: 3565598122202890964
+        Graph:
+          rid: 3160463076847255745
+        m_Parent:
+          rid: 3160463095824908594
+        Self:
+          rid: 3160463095824908576
+        Player:
+          rid: 3160463095824908577
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +158,8 @@ MonoBehaviour:
   m_Description: 
   m_Nodes:
   - rid: 3160463076847255752
-  m_VersionTimestamp: 639045161610829803
+  - rid: 3160463095824908584
+  m_VersionTimestamp: 639045981255274633
   m_SerializedVersion: 1
   m_DebugInfo: {fileID: 7400033965888463967}
   m_RuntimeGraph: {fileID: -2193798306475876068}
@@ -148,6 +181,26 @@ MonoBehaviour:
     Variables: []
     NamedChildren: []
     IsPlaceholder: 0
+  - Name: Hablar
+    Story: '[Self] habla con [Player]'
+    RuntimeTypeString: HablarAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    RuntimeTypeID:
+      m_Value0: 11786474973633626141
+      m_Value1: 5439664943653276624
+    Variables:
+    - Name: Self
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    - Name: Player
+      Type:
+        m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+    IsPlaceholder: 0
   m_Blackboards: []
   m_MainBlackboardAuthoringAsset: {fileID: 4269758172098450160}
   m_CommandBuffer:
@@ -162,7 +215,7 @@ MonoBehaviour:
     - rid: 3160463076847255752
       type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
-        Position: {x: 0, y: 0}
+        Position: {x: 0, y: -43.94602}
         ID:
           m_Value0: 11416437734718245107
           m_Value1: 16098345161887902258
@@ -186,7 +239,105 @@ MonoBehaviour:
         m_IsFloating: 0
         m_NodeModel:
           rid: 3160463076847255752
+        m_Connections:
+        - rid: 3160463095824908585
+    - rid: 3160463095824908584
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 0, y: 62.05398}
+        ID:
+          m_Value0: 15767591848404186374
+          m_Value1: 3565598122202890964
+        Parents: []
+        PortModels:
+        - rid: 3160463095824908585
+        - rid: 3160463095824908586
+        NodeType:
+          m_SerializableType: HablarAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 11786474973633626141
+          m_Value1: 5439664943653276624
+        m_FieldValues:
+        - rid: 3160463095824908587
+        - rid: 3160463095824908588
+    - rid: 3160463095824908585
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3160463095824908584
+        m_Connections:
+        - rid: 3160463076847255753
+    - rid: 3160463095824908586
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 3160463095824908584
         m_Connections: []
+    - rid: 3160463095824908587
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Self
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3160463095824908589
+        LinkedVariable:
+          rid: 3160463095824908590
+    - rid: 3160463095824908588
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Player
+        Type:
+          m_SerializableType: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 3160463095824908591
+        LinkedVariable:
+          rid: 3160463095824908592
+    - rid: 3160463095824908589
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3160463095824908590
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3160463095824908591
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 3160463095824908592
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11499429997297179214
+          m_Value1: 15150024916418965370
+        Name: Player
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
 --- !u!114 &4269758172098450160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,11 +351,12 @@ MonoBehaviour:
   m_Name: NPCHabla Blackboard
   m_EditorClassIdentifier: Unity.Behavior.Authoring::Unity.Behavior.BehaviorBlackboardAuthoringAsset
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 15277171657448964648
+    m_Value1: 17403424263741766555
   m_Variables:
   - rid: 3160463076847255754
-  m_VersionTimestamp: 639045161610718264
+  - rid: 3160463095824908570
+  m_VersionTimestamp: 639045969147406371
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: -5966162148829693651}
@@ -218,6 +370,16 @@ MonoBehaviour:
           m_Value0: 1
           m_Value1: 0
         Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 3160463095824908570
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11499429997297179214
+          m_Value1: 15150024916418965370
+        Name: Player
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
