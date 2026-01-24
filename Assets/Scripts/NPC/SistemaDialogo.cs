@@ -5,132 +5,127 @@ using UnityEngine;
 
 public class SistemaDialogo : MonoBehaviour
 {
-       [SerializeField] private GameObject marcoDialogo;
+    [SerializeField] private GameObject marcoDialogo;
     [SerializeField] private TMP_Text texto;
-        //Ya no se necesita xd [SerializeField] private DialogoSO dialogo;
-        
-        //OMG un evento hi 👋
+
     public event Action OnDialogoTerminado;
 
     private int fraseActual;
     private bool escribiendo = false;
     private DialogoSO dialogoActual;
-    private bool patatudo = false; //⚠️⚠️⚠️CAMBIAR NOMBRE
-    
-        //PATRÓN SINGLETON (meme de Spiderman señalando)
-                //Único en tooodo el proyecto y accesible desde cualquier punto
+    private bool enRango = false;
+
+    //⚠️⚠️SINGLETON
     public static SistemaDialogo instance;
-    
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
-
     }
 
     private void OnEnable()
     {
         NPC.OnEntrarEnRango += EntrarEnRango;
-        
     }
 
     private void OnDisable()
     {
         NPC.OnEntrarEnRango -= EntrarEnRango;
-        
     }
-    
+
+    // =================================================
+    // SE LLAMA CUANDO EL JUGADOR ENTRA EN EL TRIGGER DEL NPC
+    // =================================================
     private void EntrarEnRango(DialogoSO dialogo)
     {
-        patatudo =  true;
-        IniciarDialogo(dialogo);
+        enRango = true;
+        dialogoActual = dialogo;
+    }
+
+    // =================================================
+    // INICIA EL DIÁLOGO (PRIMERA FRASE)
+    // =================================================
+    public void IniciarDialogo()
+    {
+        if (!enRango || dialogoActual == null)
+            return;
+
+        fraseActual = 0;
+        marcoDialogo.SetActive(true);
+        StartCoroutine(EscribirFrase());
         
     }
 
-    //[ContextMenu("Inicio")] //Para poder probarlo dentro de la ejecución sin necesidad de quien te vaya a soltar la chapa
-    public void IniciarDialogo(DialogoSO dialogo)
-    {
-        dialogoActual = dialogo;
-        marcoDialogo.SetActive(true);
-        StartCoroutine(EscribirFrase());
-
-    }
-    
-    [ContextMenu("Completar Frase")]
+    // =================================================
+    // AVANZA FRASES CUANDO PULSAS F
+    // =================================================
     public void SiguienteFrase()
     {
-            //Si no estoy escribiendo me escribes la siguiente frase
+        // 🔴 ESTA ES LA PROTECCIÓN QUE EVITA EL ERROR
+        if (!enRango || dialogoActual == null)
+            return;
+
         if (!escribiendo)
         {
             fraseActual++;
+
             if (fraseActual >= dialogoActual.frases.Length)
             {
                 TerminarDialogo();
-                
             }
             else
             {
                 StartCoroutine(EscribirFrase());
-                
             }
-            
         }
-            //Sino pues que complete la frase
         else
         {
             CompletarFrase();
-            
         }
-        
     }
 
+    // =================================================
+    // ESCRIBE LA FRASE CARÁCTER A CARÁCTER
+    // =================================================
+    private IEnumerator EscribirFrase()
+    {
+        escribiendo = true;
+
+        texto.color = dialogoActual.color;
+        texto.text = "";
+
+        foreach (char letra in dialogoActual.frases[fraseActual])
+        {
+            texto.text += letra;
+            yield return new WaitForSeconds(dialogoActual.velocidadTexto);
+        }
+
+        escribiendo = false;
+    }
+
+    // =================================================
+    // COMPLETA LA FRASE INSTANTÁNEAMENTE
+    // =================================================
     private void CompletarFrase()
     {
         StopAllCoroutines();
-            //Pongo en el texto la frase completa
         texto.text = dialogoActual.frases[fraseActual];
         escribiendo = false;
     }
 
-    //CORRUTINA (semáforo, me voy a turbomatar)
-    private IEnumerator EscribirFrase()
-    {
-        escribiendo = true;
-            //Va caracter a caracter
-        string fraseAEscribir = dialogoActual.frases[fraseActual];
-        //     //POR SI SE QUIERE QUE SALGA POR PALABRAS Y NO POR LETRAS
-        // string[] palabras = fraseAEscribir.Split(" ");
-        //     //Y en el foreach en vez de letra sería palabra y poner palabras en vez de fraseTroceada
-        char[] fraseTroceada = fraseAEscribir.ToCharArray();
-            
-            //Color del dialogo
-        texto.color = dialogoActual.color;
-            //Limpiar la caja de texto por si acaso
-        texto.text = "";
-        
-        foreach (var letra in fraseTroceada)
-        {
-            texto.text += letra;
-                //Espera
-            yield return new WaitForSeconds(dialogoActual.velocidadTexto);
-            
-        }
-        
-        escribiendo = false;
-
-    }
-
+    // =================================================
+    // TERMINA EL DIÁLOGO
+    // =================================================
     private void TerminarDialogo()
     {
-            //Se ponía interrogación para saber si hay alguien interesado en el evento, para que no reviente el código
-        OnDialogoTerminado?.Invoke();
-        
         marcoDialogo.SetActive(false);
-            //Para que cuando hables con el NPC de nuevo te lo repita
         fraseActual = 0;
-        
+        dialogoActual = null;
+        enRango = false;
+
+        OnDialogoTerminado?.Invoke();
     }
-    
 }

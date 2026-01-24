@@ -23,6 +23,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Interactuar",
+                    "type": "Button",
+                    "id": "29c19968-8642-406c-98a8-7bf7e13b96f8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -91,15 +100,26 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "627b4127-49ba-4c17-9f7a-78b3c325ac61",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interactuar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Interaction",
+            "name": "Dialog",
             "id": "a4460eb6-2413-40b8-aa4e-62688cc30530",
             "actions": [
                 {
-                    "name": "Interactuar",
+                    "name": "PasarDialogo",
                     "type": "Button",
                     "id": "09826980-600f-4b13-ad24-9fd76c571f95",
                     "expectedControlType": "",
@@ -116,7 +136,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interactuar",
+                    "action": "PasarDialogo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

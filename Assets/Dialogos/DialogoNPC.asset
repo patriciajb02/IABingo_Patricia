@@ -18,8 +18,9 @@ MonoBehaviour:
     a la salida.
   - "Aunque...no te ser\xE1 f\xE1cil. Juejue. A las ancianas que suelen habituar
     este bingo no les ha gustado mucho que ganases t\xFA."
-  - 
-  - "Nuestra mascota Ludopat\xEDa te echar\xE1 una mano con esas se\xF1oras enfurecidas."
+  - "Nuestra mascota Ludopat\xEDa te echar\xE1 una mano con ellas, relax. Te guiar\xE1
+    a la salida, as\xED que siguele el ritmo."
+  - "Cuidado con ellas, hace unos d\xEDas gan\xE9 yo y me dejaron la cara as\xED."
   - "Suerte llegando a la salida \n(\u02F6 \u2022\u0300 \u1D17 -\u02F6)."
   velocidadTexto: 0.1
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0, g: 0, b: 0, a: 1}

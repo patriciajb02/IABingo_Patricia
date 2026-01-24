@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
-    public static event Action<Vector3> OnRunning;
+    public static event Action OnHablar;
     
     [Header("Movement")]
     [SerializeField]
@@ -36,12 +36,22 @@ public class FirstPersonController : MonoBehaviour
     {
         playerInput.actions["Move"].performed += UpdateMovement;
         playerInput.actions["Move"].canceled += UpdateMovement;
+        playerInput.actions["Interactuar"].performed += OnInteractuar;
 
+
+    }
+
+    private void OnInteractuar(InputAction.CallbackContext obj)
+    {
+        OnHablar?.Invoke();
+        Debug.Log("Interactuar");
+        
     }
 
     private void UpdateMovement(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>();
+        
     }
 
     void Update()
@@ -65,6 +75,8 @@ public class FirstPersonController : MonoBehaviour
             //Se rota el vector (0, 0, 1) a dicho ángulo
             Vector3 movementVector = Quaternion.Euler(0, angleToRotate, 0) * Vector3.forward;
             
+            controller.Move(movementVector * movementSpeed * Time.deltaTime);
+            
         }
             //El enemigo va a detectar el sonido por la velocidad a la que vamos
             //Esta es la velocidad en el plano de movimiento, sin contar caídas o saltos (cargándote la y)
@@ -80,6 +92,8 @@ public class FirstPersonController : MonoBehaviour
             //❗⚠️ES MUY IMPORTANTE
         playerInput.actions["Move"].performed -= UpdateMovement;
         playerInput.actions["Move"].canceled -= UpdateMovement;
+        playerInput.actions["Interactuar"].performed -= OnInteractuar;
+
         
     }
     
