@@ -15,21 +15,16 @@ public partial class GuiarAction : Action
 
     protected override Status OnStart()
        {
-           if (PuntosGuia.Value == null || PuntosGuia.Value.Count == 0)
-           {
-               return Status.Failure;
-           }
+           if (PuntosGuia.Value == null || PuntosGuia.Value.Count == 0) return Status.Failure;
    
-           if (NumeroPosicion.Value >= PuntosGuia.Value.Count)
-           {
-               return Status.Failure; 
-           }
-   
+           if (NumeroPosicion.Value >= PuntosGuia.Value.Count) return Status.Failure; 
+           
            Destino.Value = PuntosGuia.Value[NumeroPosicion.Value];
    
            NumeroPosicion.Value++;
    
            return Status.Success;
+           
        }
 
 }

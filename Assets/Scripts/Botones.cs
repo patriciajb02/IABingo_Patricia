@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class Botones : MonoBehaviour
 {
-    
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -16,6 +15,5 @@ public class Botones : MonoBehaviour
         SceneManager.LoadScene("Bingojuego");
         
     }
-    
     
 }

@@ -29,6 +29,7 @@ public class PlayerDialogSystem : MonoBehaviour
     {
         playerInput.actions["Interactuar"].started -= LanzarInteraccion;
         SistemaDialogo.instance.OnDialogoTerminado -= AvisoDialogoTerminado;
+        
     }
 
     private void LanzarInteraccion(InputAction.CallbackContext obj)
@@ -39,9 +40,8 @@ public class PlayerDialogSystem : MonoBehaviour
 
     public void CambiarEstadoInputs(string nombreMapaInputs)
     {
-        //Cambia el mapa que tengas activo a otro nuevo
+            //Cambia el mapa que tenga activo a otro nuevo
         playerInput.SwitchCurrentActionMap(nombreMapaInputs);
-
         
     }
     

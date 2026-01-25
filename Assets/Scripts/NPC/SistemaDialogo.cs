@@ -15,81 +15,74 @@ public class SistemaDialogo : MonoBehaviour
     private DialogoSO dialogoActual;
     private bool enRango = false;
 
-    //⚠️⚠️SINGLETON
+        //⚠️⚠️SINGLETON
     public static SistemaDialogo instance;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
+        
         else
             Destroy(gameObject);
+        
     }
-
+        //👋😔Fin del Singleton
+        
     private void OnEnable()
     {
+            //Para que avise si el jugador entra en rango
         NPC.OnEntrarEnRango += EntrarEnRango;
+        
     }
 
     private void OnDisable()
     {
         NPC.OnEntrarEnRango -= EntrarEnRango;
+        
     }
 
-    // =================================================
-    // SE LLAMA CUANDO EL JUGADOR ENTRA EN EL TRIGGER DEL NPC
-    // =================================================
+        //Para que solo pueda interactuar con el NPC si entra en su SphereCollider
     private void EntrarEnRango(DialogoSO dialogo)
     {
         enRango = true;
         dialogoActual = dialogo;
+        
     }
-
-    // =================================================
-    // INICIA EL DIÁLOGO (PRIMERA FRASE)
-    // =================================================
+    
     public void IniciarDialogo()
     {
-        if (!enRango || dialogoActual == null)
-            return;
+        if (!enRango || dialogoActual == null) return;
 
         fraseActual = 0;
         marcoDialogo.SetActive(true);
         StartCoroutine(EscribirFrase());
         
     }
-
-    // =================================================
-    // AVANZA FRASES CUANDO PULSAS F
-    // =================================================
+    
     public void SiguienteFrase()
     {
-        // 🔴 ESTA ES LA PROTECCIÓN QUE EVITA EL ERROR
-        if (!enRango || dialogoActual == null)
-            return;
+        if (!enRango || dialogoActual == null) return;
 
         if (!escribiendo)
         {
             fraseActual++;
 
             if (fraseActual >= dialogoActual.frases.Length)
-            {
                 TerminarDialogo();
-            }
+            
             else
-            {
                 StartCoroutine(EscribirFrase());
-            }
+            
         }
         else
         {
             CompletarFrase();
+            
         }
+        
     }
-
-    // =================================================
-    // ESCRIBE LA FRASE CARÁCTER A CARÁCTER
-    // =================================================
+    
     private IEnumerator EscribirFrase()
     {
         escribiendo = true;
@@ -101,24 +94,29 @@ public class SistemaDialogo : MonoBehaviour
         {
             texto.text += letra;
             yield return new WaitForSeconds(dialogoActual.velocidadTexto);
+            
         }
 
         escribiendo = false;
+        
     }
-
-    // =================================================
-    // COMPLETA LA FRASE INSTANTÁNEAMENTE
-    // =================================================
+    
     private void CompletarFrase()
     {
+            //Parar la corrutina q escribe palabra a palabra
         StopAllCoroutines();
-        texto.text = dialogoActual.frases[fraseActual];
-        escribiendo = false;
-    }
 
-    // =================================================
-    // TERMINA EL DIÁLOGO
-    // =================================================
+            //Asigna directamente al texto la frase completa actual,
+            // sin animación ni escritura progresiva.
+        texto.text = dialogoActual.frases[fraseActual];
+
+            //Indica que ya NO se está escribiendo la frase,
+            // para permitir avanzar a la siguiente o evitar
+            // que se vuelva a llamar a CompletarFrase.
+        escribiendo = false;
+        
+    }
+    
     private void TerminarDialogo()
     {
         marcoDialogo.SetActive(false);
@@ -127,5 +125,6 @@ public class SistemaDialogo : MonoBehaviour
         enRango = false;
 
         OnDialogoTerminado?.Invoke();
+        
     }
 }

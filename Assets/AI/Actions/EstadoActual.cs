@@ -7,4 +7,5 @@ public enum EstadoActual
 	Patrol,
 	Chase,
 	Investigate
+	
 }

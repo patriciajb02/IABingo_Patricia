@@ -20,7 +20,7 @@ public partial class CalcularPuntoCercanoAction : Action
     protected override Status OnStart()
     {
         Vector3 randomPoint;
-        //Mientras se calcula el punto devuelve Running
+            //Mientras se calcula el punto devuelve Running
         do
         {
             randomPoint = PointOfInterest.Value + Random.insideUnitSphere * SearchRadius.Value;
@@ -28,14 +28,14 @@ public partial class CalcularPuntoCercanoAction : Action
         } while (!IsValidPoint(randomPoint));
 
         NearbyPoint.Value = randomPoint;
-        //Cuando lo acabe de calcular devuelve Success
+            //Cuando lo acabe de calcular devuelve Success
         return Status.Success;
+        
     }
 
     private bool IsValidPoint(Vector3 point)
     {
-        if(Vector3.Distance(Self.Value.transform.position, point) < MinimumDistance.Value)
-            return false;
+        if(Vector3.Distance(Self.Value.transform.position, point) < MinimumDistance.Value) return false;
         
         return NavMesh.SamplePosition(point, out NavMeshHit hit, 0.02f, NavMesh.AllAreas);
         

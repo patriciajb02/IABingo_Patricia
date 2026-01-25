@@ -2,26 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//⚠️SI PONES ESTO es para que cuando acoples el script
-    // dentro de un gameObject le obliga a poner el CharacterController
-    //Si al lado de CharacterController una coma puedes seguir añadiendo requerimientos
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
     public static event Action OnHablar;
     
-    [Header("Movement")]
-    [SerializeField]
-    private float movementSpeed;
-
-    [SerializeField]
-    private float detectionRadius;
+        [Header("Movimiento")]
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float detectionRadius;
 
     private CharacterController controller;
     private Camera cam;
     private PlayerInput playerInput;
 
     Vector2 movementInput;
+    
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -29,9 +24,9 @@ public class FirstPersonController : MonoBehaviour
         
         cam = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
-        //SE ACTIVA CUANDO SE ACTIVA EL GAMEOBJECT
     private void OnEnable()
     {
         playerInput.actions["Move"].performed += UpdateMovement;
@@ -81,19 +76,14 @@ public class FirstPersonController : MonoBehaviour
             //El enemigo va a detectar el sonido por la velocidad a la que vamos
             //Esta es la velocidad en el plano de movimiento, sin contar caídas o saltos (cargándote la y)
         Vector3 horizontalVelocity = new Vector3(controller.velocity.x, 0, controller.velocity.z);
-            //SE PONE MAGNITUDE PORQUE ES LA LONGITUD DEL VECTOR, o sea la cantidad de velocidad en este caso
-        //Debug.Log(controller.velocity.magnitude);
-
+        
     }
     
     private void OnDisable()
     {
-            //SE PONE -= para que se "desuscriba" cuando se desabilite y así no genera errores cuando muera
-            //❗⚠️ES MUY IMPORTANTE
         playerInput.actions["Move"].performed -= UpdateMovement;
         playerInput.actions["Move"].canceled -= UpdateMovement;
         playerInput.actions["Interactuar"].performed -= OnInteractuar;
-
         
     }
     

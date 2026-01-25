@@ -8,16 +8,14 @@ using Unity.Properties;
 [NodeDescription(name: "BuscarTarget", story: "[Self] is searching for [Target] (monke busca monke)", category: "Action", id: "a956e60fc5acd4f68a5691b111bdd30b")]
 public partial class BuscarTargetAction : Action
 {
-        //⚠️ RESPETAR EL BLACKBOARDVARIABLE
     [SerializeReference] public BlackboardVariable<GameObject> Self;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
-        //Estas variables saldrán en el inspector del Blackboard
     [SerializeReference] public BlackboardVariable<float> Radius;
     [SerializeReference] public BlackboardVariable<float> Angle;
     [SerializeReference] public BlackboardVariable<String> WhatIsTarget;
     [SerializeReference] public BlackboardVariable<String> WhatIsObstacle;
 
-        //CONVERTIR A LAYERMASK LOS STRINGS
+        //⚠️ CONVERTIR A LAYERMASK LOS STRINGS
     private int whatIsTargetLayer;
     private int whatIsObstacleLayer;
     
@@ -26,7 +24,7 @@ public partial class BuscarTargetAction : Action
     
     protected override Status OnStart()
     {
-            //Desplazamiento de bits para CONVERTIR A LAYERMASK LOS STRINGS
+            //❗⬆️ Desplazamiento de bits para CONVERTIR A LAYERMASK LOS STRINGS
         whatIsTargetLayer = 1 << LayerMask.NameToLayer(WhatIsTarget.Value);
         whatIsObstacleLayer = 1 << LayerMask.NameToLayer(WhatIsObstacle.Value);
         
@@ -41,6 +39,7 @@ public partial class BuscarTargetAction : Action
             return Status.Running;
             
         Vector3 directionToTarget = results[0].transform.position - Self.Value.transform.position;
+        
             //El ángulo de visión
         if (Vector3.Angle(Self.Value.transform.forward, directionToTarget) > Angle)
             return Status.Running;
@@ -53,7 +52,6 @@ public partial class BuscarTargetAction : Action
             //Los posibles resultados que ha podido tener se meten al array de collider
             //Modificamos el valor de Target. Target es el gameObject introducido en el array
             //Esto es tras pasar los 3 filtros anteriores
-            //En el inspector por eso no se le asocia el Target
         Target.Value = results[0].gameObject;
         
             //Si encuentra algo entra en Success y acaba
